@@ -684,3 +684,5 @@ if (run==1):
     time.sleep(3)
     GPIO.output(buzz,False)
     GPIO.output(LED,False)
+    camera.stop_recording()
+    camera.stop_preview()
