@@ -9,7 +9,11 @@ import struct
 import serial
 import string
 from datetime import datetime
+from picamera import PiCamera
 
+camera =PiCamera()
+
+camera.start_preview()
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 lora=serial.Serial('/dev/ttyUSB1',9600)
@@ -549,6 +553,11 @@ if __name__ == '__main__':
         
         
     while (startval==0):
+        
+        if (run==0):
+            sleep(2)
+            date=datetime.datetime.now()strftime("%m_%d_%Y_%H_%M_%S")
+            camera.start_recording("/home/pi/Desktop/" + date + ".h264")
         ledstate= not ledstate
         buzzstate= not buzzstate
         GPIO.output(LED,ledstate)
